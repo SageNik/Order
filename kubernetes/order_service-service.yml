@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  labels:
+    name: order-service-service
+    app: order-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 9901
+      targetPort: 9901
+  selector:
+    name: order-service-pod
+    app: order-app

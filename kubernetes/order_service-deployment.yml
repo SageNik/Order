@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderservice-deployment
+  labels:
+    app: order-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: order-service-pod
+      app: order-app
+  template:
+    metadata:
+      name: order-service-pod
+      labels:
+        name: order-service-pod
+        app: order-app
+    spec:
+      containers:
+        - name: order-service
+          image: olnik27/order
+          ports:
+            - containerPort: 9901

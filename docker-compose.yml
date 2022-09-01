@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  database:
+    image: postgres:12-alpine
+    ports:
+      - 54325:5432
+    volumes:
+      - $HOME/docker/volumes/insk-appointment-service_data:/var/lib/postgresql
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: ${DATASOURCE_USERNAME:-admin}
+      POSTGRES_PASS: ${DATASOURCE_PASSWORD:-pass}
+  rabbit:
+    container_name: dev_rabbit
+    hostname: rabbit
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"

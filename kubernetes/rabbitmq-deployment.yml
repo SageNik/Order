@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+  labels:
+    name: rabbitmq-pod
+    app: order-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: rabbitmq-pod
+      app: order-app
+  template:
+    metadata:
+      name: rabbitmq-pod
+      labels:
+        name: rabbitmq-pod
+        app: order-app
+    spec:
+      containers:
+        - name: rabbit-mq
+          image: rabbitmq:3.9.11
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: "guest"
+            - name: RABBITMQ_DEFAULT_PASS
+              value: "guest"
+          ports:
+            - containerPort: 5672

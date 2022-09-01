@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-postgres
+  labels:
+    name: order-postgres-service
+    app: order-app
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    name: order-postgres-pod
+    app: order-app

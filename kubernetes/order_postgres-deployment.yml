@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderpostgres-deployment
+  labels:
+    name: order-postgres-pod
+    app: order-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: order-postgres-pod
+      app: order-app
+  template:
+    metadata:
+      name: order-postgres-pod
+      labels:
+        name: order-postgres-pod
+        app: order-app
+    spec:
+      containers:
+        - name: orderpostgres
+          image: postgres:latest
+          env:
+            - name: POSTGRES_DB
+              value: "order"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+          ports:
+            - containerPort: 5432
